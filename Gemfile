@@ -5,6 +5,7 @@ ruby '2.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 gem 'pg', '0.15.1'
+gem 'bootstrap-sass', '2.3.2.0'
 
 group :development, :test do
 	# Use sqlite3 as the database for Active Record

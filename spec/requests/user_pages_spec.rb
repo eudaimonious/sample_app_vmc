@@ -37,15 +37,15 @@ describe "User pages" do
         it { should have_content('Email is invalid') }
       end
 
-      describe "and a bad password confirmation"
+      describe "and a bad password confirmation" do
         before do
           fill_in "Password", with: "foobar"
           fill_in "Confirmation", with: "barfoo"
+          click_button submit
         end
 
         it { should have_content("Password confirmation doesn't match Password") }
       end
-
     end
 
     describe "with valid information" do
@@ -58,6 +58,14 @@ describe "User pages" do
 
       it "should create a user" do
         expect { click_button submit }.to change(User, :count).by(1)
+      end
+
+      describe "after save the user" do
+        before { click_button submit }
+        let(:user) { User.find_by(email: 'user@example.com') }
+
+        it { should have_title(user.name) }
+        it { should have_selector('div.alert.alert-success', text: 'Welcome') }
       end
     end
   end
